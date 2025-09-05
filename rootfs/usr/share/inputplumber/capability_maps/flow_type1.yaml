@@ -1,6 +1,6 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/ShadowBlip/InputPlumber/main/rootfs/usr/share/inputplumber/schema/capability_map_v1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ShadowBlip/InputPlumber/main/rootfs/usr/share/inputplumber/schema/capability_map_v2.json
 # Schema version number
-version: 1
+version: 2
 
 # The type of configuration schema
 kind: CapabilityMap
@@ -14,11 +14,45 @@ id: flw1
 # List of mapped events that are activated by a specific set of activation keys.
 mapping:
   - name: Armoury Crate button
+    mapping_type:
+      evdev: chord
     source_events:
-      - keyboard: KeyProg3
+      - evdev:
+          event_type: KEY
+          event_code: KEY_PROG3
+          value_type: button
     target_event:
       gamepad:
         button: QuickAccess
 
-# List of events to filter from the source devices
-filtered_events: []
+  - name: Armoury Crate and VolumeUp
+    mapping_type:
+      evdev: delayed_chord
+    source_events:
+      - evdev:
+          event_type: KEY
+          event_code: KEY_PROG3
+          value_type: button
+      - evdev:
+          event_type: KEY
+          event_code: KEY_VOLUMEUP
+          value_type: button
+    target_event:
+      gamepad:
+        button: Screenshot
+
+  - name: Armoury Crate and VolumeDown
+    mapping_type:
+      evdev: delayed_chord
+    source_events:
+      - evdev:
+          event_type: KEY
+          event_code: KEY_PROG3
+          value_type: button
+      - evdev:
+          event_type: KEY
+          event_code: KEY_VOLUMEDOWN
+          value_type: button
+    target_event:
+      gamepad:
+        button: Guide

@@ -26,6 +26,12 @@ source_devices:
     evdev:
       name: Asus WMI hotkeys
       handler: event*
+  - group: keyboard
+    passthrough: true
+    evdev:
+      name: AT Translated Set 2 keyboard
+      phys_path: isa0060/serio0/input0
+      handler: event*
 
 # Optional configuration for the composite device
 options:
